@@ -17,6 +17,16 @@ def findMusescoreCmd():
             return cmd
     raise RuntimeError("MuseScore executable not found on PATH.")
 
+def mxml2png(mxmlPath: str, pngPath: str, dpi: int = 300):
+    env = os.environ.copy()
+    env["QT_QPA_PLATFORM"] = "offscreen"
+
+    subprocess.run(
+        ["xvfb-run", "-a", MUSESCORE_APPIMAGE, "-r", str(dpi), "-o", pngPath, mxmlPath],
+        check=True,
+        env=env,
+    )
+
 MUSESCORE_CMD = findMusescoreCmd()
 
 if not shutil.which("xvfb-run"):
@@ -24,26 +34,7 @@ if not shutil.which("xvfb-run"):
 
 print(MUSESCORE_CMD)
 
-# MUSESCORE_APPIMAGE = "musescore4.6.5arm64.AppImage"
-# # MUSESCORE_CMD = "xvfb-run" + " " + MUSESCORE_APPIMAGE
-# 
-# def mxml2png(mxmlPath: str, pngPath: str, dpi: int = 300):
-#     env = os.environ.copy()
-#     env["QT_QPA_PLATFORM"] = "offscreen"
-# 
-#     subprocess.run(
-#         ["xvfb-run", "-a", MUSESCORE_APPIMAGE, "-r", str(dpi), "-o", pngPath, mxmlPath],
-#         check=True,
-#         env=env,
-#     )
-# 
-# m21Settings = environment.UserSettings()
-# museScoreCmd = findMusescoreCmd()
-# m21Settings["musescoreDirectPNGPath"] = museScoreCmd
-# print( m21Settings["musescoreDirectPNGPath"] )
-# 
-# 
-# 
+
 # RANDOM_SEED_NOTE = None #None or int
 # rng = np.random.default_rng(seed=RANDOM_SEED_NOTE)
 # 
