@@ -4,12 +4,36 @@ import random, numpy as np
 import os
 import streamlit as st
 from PIL import Image
-import subprocess
+import os, subprocess, shutil, pathlib
 # from pydub import AudioSegment
 
+# m21Settings = environment.UserSettings()
+# m21Settings["musescoreDirectPNGPath"] = "/Applications/MuseScore 4.app/Contents/MacOS/mscore"
+# print( m21Settings["musescoreDirectPNGPath"] )
+
+def findMusescoreCmd():
+    for cmd in ("musescore", "mscore", "musescore3"):
+        if shutil.which(cmd):
+            return cmd
+    raise RuntimeError("MuseScore executable not found on PATH.")
+
+def mxml2png(mxmlPath: str, pngPath: str, dpi: int = 300):
+    cmd = findMusescoreCmd()
+    env = os.environ.copy()
+    env["QT_QPA_PLATFORM"] = "offscreen"
+
+    subprocess.run(
+        ["xvfb-run", "-a", cmd, "-r", str(dpi), "-o", pngPath, mxmlPath],
+        check=True,
+        env=env,
+    )
+
 m21Settings = environment.UserSettings()
-m21Settings["musescoreDirectPNGPath"] = "/Applications/MuseScore 4.app/Contents/MacOS/mscore"
+museScoreCmd = findMusescoreCmd()
+m21Settings["musescoreDirectPNGPath"] = museScoreCmd
 print( m21Settings["musescoreDirectPNGPath"] )
+
+
 
 RANDOM_SEED_NOTE = None #None or int
 rng = np.random.default_rng(seed=RANDOM_SEED_NOTE)
