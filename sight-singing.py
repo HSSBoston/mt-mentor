@@ -11,19 +11,25 @@ import os, subprocess, shutil, pathlib
 # m21Settings["musescoreDirectPNGPath"] = "/Applications/MuseScore 4.app/Contents/MacOS/mscore"
 # print( m21Settings["musescoreDirectPNGPath"] )
 
-def findMusescoreCmd():
-    for cmd in ("musescore", "mscore", "musescore3"):
-        if shutil.which(cmd):
-            return cmd
-    raise RuntimeError("MuseScore executable not found on PATH.")
+# def findMusescoreCmd():
+#     for cmd in ("musescore", "mscore", "musescore3"):
+#         if shutil.which(cmd):
+#             return cmd
+#     raise RuntimeError("MuseScore executable not found on PATH.")
+
+for cmd in ("xvfb-run", "musescore4.6.5arm64.AppImage"):
+    if not shutil.which(cmd):
+        raise RuntimeError(cmd + " not found on PATH.")
+
+MUSESCORE_APPIMAGE = "musescore4.6.5arm64.AppImage"
+# MUSESCORE_CMD = "xvfb-run" + " " + MUSESCORE_APPIMAGE
 
 def mxml2png(mxmlPath: str, pngPath: str, dpi: int = 300):
-    cmd = findMusescoreCmd()
     env = os.environ.copy()
     env["QT_QPA_PLATFORM"] = "offscreen"
 
     subprocess.run(
-        ["xvfb-run", "-a", cmd, "-r", str(dpi), "-o", pngPath, mxmlPath],
+        ["xvfb-run", "-a", MUSESCORE_APPIMAGE, "-r", str(dpi), "-o", pngPath, mxmlPath],
         check=True,
         env=env,
     )
