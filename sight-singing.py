@@ -11,19 +11,18 @@ import os, subprocess, shutil, pathlib
 # m21Settings["musescoreDirectPNGPath"] = "/Applications/MuseScore 4.app/Contents/MacOS/mscore"
 # print( m21Settings["musescoreDirectPNGPath"] )
 
-# def findMusescoreCmd():
-#     for cmd in ("musescore", "mscore", "musescore3"):
-#         if shutil.which(cmd):
-#             return cmd
-#     raise RuntimeError("MuseScore executable not found on PATH.")
+def findMusescoreCmd():
+    for cmd in ("musescore", "mscore", "musescore3"):
+        if shutil.which(cmd):
+            return cmd
+    raise RuntimeError("MuseScore executable not found on PATH.")
 
-for cmd in ("xvfb-run", "musescore", "mscore", "musescore3"):
-    error = ""
-    if not shutil.which(cmd):
-        error = error + cmd + ", "
-    if error != "":
-        raise RuntimeError(error + " not found on PATH.")
+MUSESCORE_CMD = findMusescoreCmd()
 
+if not shutil.which("xvfb-run"):
+    raise RuntimeError("xvfb-run not found on PATH.")
+
+print(MUSESCORE_CMD)
 
 # MUSESCORE_APPIMAGE = "musescore4.6.5arm64.AppImage"
 # # MUSESCORE_CMD = "xvfb-run" + " " + MUSESCORE_APPIMAGE
