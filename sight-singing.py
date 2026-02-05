@@ -1,6 +1,6 @@
 from music21 import *
 import streamlit as st
-from PIL import Image
+from PIL import Image, ImageChops
 import os, subprocess, shutil
 from sight_singing_gen import *
 
@@ -25,6 +25,18 @@ def mxml2img(mxmlPath):
         check=True,
         env=env)
 
+def verticalAutoCrop(bg_color=(255, 255, 255)):
+    img = Image.open("melody-1.png").convert("RGB")
+    # Create background image
+    bg = Image.new("RGB", img.size, bg_color)
+    # Difference between image and background
+    diff = ImageChops.difference(img, bg)
+    bbox = diff.getbbox()
+    if bbox:
+        img.crop(bbox).save("melody-1.png")
+    else:
+        img.save("melody-1.png")
+
 def mxml2midi(mxmlPath):
     subprocess.run(
         ["xvfb-run", "-a", MUSESCORE_CMD, mxmlPath, "-o", "melody.mid"],
@@ -42,6 +54,7 @@ def midi2mp3(midiPath):
 
 score = generateSightSingingScore()
 score.write("musicxml", "melody.xml")
+verticalAutoCrop()
 mxml2img("melody.xml")
 mxml2midi("melody.xml")
 midi2mp3("melody.mid")
