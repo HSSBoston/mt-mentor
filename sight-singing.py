@@ -25,9 +25,6 @@ def score2imgMidi(score):
 #         check=True,
 #         env=env)
     
-    m21Settings = environment.UserSettings()
-    m21Settings["musescoreDirectPNGPath"] = MUSESCORE_PATH
-
     score.write("musicxml.png", fp = "melody-image.png")
 #     score.write("midi",         fp = "melody.mid")
     
