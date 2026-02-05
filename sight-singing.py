@@ -31,11 +31,11 @@ def mxml2midi(mxmlPath):
         check=True,
         env=env)
 
-def midi2mp3(midiPath):    
+def midi2mp3(midiPath):
+    soundfont = "/usr/share/sounds/sf2/FluidR3_GM.sf2"
     subprocess.run(
-        ["xvfb-run", "-a", MUSESCORE_PATH, midiPath, "-o", "melody.mp3"],
-        check=True,
-        env=env)
+        ["fluidsynth", "-ni", soundfont, "melody.mid", "-F", "melody.wav", "-r", "44100"],
+        check=True)
 
 score = generateSightSingingScore()
 score.write("musicxml", "melody.xml")
@@ -45,4 +45,4 @@ midi2mp3("melody.mid")
 
 st.title("Section 2B: Signt-singing")
 st.image( Image.open("melody-image-1.png") )
-st.audio("melody.mp3")
+st.audio("melody.wav")
