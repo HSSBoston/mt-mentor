@@ -10,7 +10,7 @@ def findMusescoreCmd():
             return cmd
     raise RuntimeError("MuseScore executable not found on PATH.")
 
-MUSESCORE_CMD = findMusescoreCmd()
+MUSESCORE_PATH = findMusescoreCmd()
 # st.write(MUSESCORE_CMD)
 
 if not shutil.which("xvfb-run"):
