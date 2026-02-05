@@ -32,10 +32,14 @@ def mxml2midi(mxmlPath):
         env=env)
 
 def midi2mp3(midiPath):
-    soundfont = "/usr/share/sounds/sf2/FluidR3_GM.sf2"
+#     soundfont = "/usr/share/sounds/sf2/FluidR3_GM.sf2"
+#     subprocess.run(
+#         ["fluidsynth", "-ni", soundfont, "melody.mid", "-F", "melody.wav", "-r", "44100"],
+#         check=True)
     subprocess.run(
-        ["fluidsynth", "-ni", soundfont, "melody.mid", "-F", "melody.wav", "-r", "44100"],
-        check=True)
+        ["xvfb-run", "-a", MUSESCORE_PATH, "melody.mid", "-o", "melody.wav"],
+        check=True,
+        env=env)    
     subprocess.run(
         ["ffmpeg", "-y", "-i", "melody.wav", "-codec:a", "libmp3lame", "-q:a", "4", "melody.mp3"],
         check=True)
