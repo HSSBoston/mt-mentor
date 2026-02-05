@@ -39,7 +39,8 @@ def midi2mp3(midiPath):
 
 score = generateSightSingingScore()
 score.write("musicxml", "melody.xml")
-mxml2imgMidi("melody.xml")
+mxml2img("melody.xml")
+mxml2midi("melody.xml")
 midi2mp3("melody.mid")
 
 st.title("Section 2B: Signt-singing")
