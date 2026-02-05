@@ -21,7 +21,7 @@ env["QT_QPA_PLATFORM"] = "offscreen"
 
 def mxml2img(mxmlPath):
     subprocess.run(
-        ["xvfb-run", "-a", MUSESCORE_CMD, mxmlPath, "-o", "melody-image.png"],
+        ["xvfb-run", "-a", MUSESCORE_CMD, mxmlPath, "-o", "melody.png"],
         check=True,
         env=env)
 
@@ -35,7 +35,7 @@ def verticalAutoCrop(bg_color=(255, 255, 255)):
     if bbox:
         img.crop(bbox).save("melody-1.png")
     else:
-        img.save("melody-1.png")
+        img.save("melody.png")
 
 def mxml2midi(mxmlPath):
     subprocess.run(
@@ -60,5 +60,5 @@ mxml2midi("melody.xml")
 midi2mp3("melody.mid")
 
 st.title("Section 2B: Sight-singing")
-st.image( Image.open("melody-image-1.png") )
+st.image( Image.open("melody-1.png") )
 st.audio("melody.mp3")
