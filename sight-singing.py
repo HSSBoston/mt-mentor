@@ -54,4 +54,4 @@ st.title("Section 2B: Sight-singing")
 st.image( Image.open("melody-image-1.png") )
 st.audio("melody.mp3")
 
-st.markdown("<A HREF="melody.mp3">MP3</A>")
+st.markdown("aaa <A HREF="melody.mp3">MP3</A>", unsafe_allow_html=True)
