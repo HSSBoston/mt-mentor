@@ -230,10 +230,10 @@ def generateSightSingingScore():
     melody.append(m2)
     melody.append(m3)
     melody.append(m4)
-    score.insert(0, melody)
-    score.insert(0, metadata.Metadata())
-    score.metadata.title = ""
-    score.metadata.composer = ""
+#     score.insert(0, melody)
+#     score.insert(0, metadata.Metadata())
+#     score.metadata.title = ""
+#     score.metadata.composer = ""
     return melody
 
 if __name__ == "__main__":
