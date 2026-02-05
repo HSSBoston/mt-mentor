@@ -32,10 +32,6 @@ def mxml2midi(mxmlPath):
         env=env)
 
 def midi2mp3(midiPath):
-#     soundfont = "/usr/share/sounds/sf2/FluidR3_GM.sf2"
-#     subprocess.run(
-#         ["fluidsynth", "-ni", soundfont, "melody.mid", "-F", "melody.wav", "-r", "44100"],
-#         check=True)
     subprocess.run(
         ["xvfb-run", "-a", MUSESCORE_PATH, "melody.mid", "-o", "melody.wav"],
         check=True,
@@ -53,5 +49,3 @@ midi2mp3("melody.mid")
 st.title("Section 2B: Sight-singing")
 st.image( Image.open("melody-image-1.png") )
 st.audio("melody.mp3")
-
-st.markdown('aaa <A HREF="melody.mp3">MP3</A>', unsafe_allow_html=True)
