@@ -25,7 +25,9 @@ MUSESCORE_CMD = findMusescoreCmd()
 if not shutil.which("xvfb-run"):
     raise RuntimeError("xvfb-run not found on PATH.")
 
-print(MUSESCORE_CMD)
+st.write(MUSESCORE_CMD)
+st.info(MUSESCORE_CMD)
+st.warning(MUSESCORE_CMD)
 
 
 # RANDOM_SEED_NOTE = None #None or int
