@@ -37,7 +37,7 @@ def midi2mp3(midiPath):
         ["fluidsynth", "-ni", soundfont, "melody.mid", "-F", "melody.wav", "-r", "44100"],
         check=True)
     subprocess.run(
-        ["ffmpeg", "-y", "-i", "melody.wav", "-codec:a", "libmp3lame", "-q:a", "4", melody.mp3],
+        ["ffmpeg", "-y", "-i", "melody.wav", "-codec:a", "libmp3lame", "-q:a", "4", "melody.mp3"],
         check=True)
 
 score = generateSightSingingScore()
