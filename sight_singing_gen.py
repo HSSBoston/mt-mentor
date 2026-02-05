@@ -232,7 +232,7 @@ def generateSightSingingScore():
     melody.append(m4)
     score.insert(0, melody)
     score.insert(0, metadata.Metadata())
-    score.metadata.title = "AP Sight-singing Question"
+    score.metadata.title = ""
     score.metadata.composer = "Music Theory Mentor"
     return score
 

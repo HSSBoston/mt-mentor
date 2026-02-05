@@ -38,6 +38,6 @@ score.write("musicxml", "melody.xml")
 mxml2imgMidi("melody.xml")
 # score2mp3(score)
 
-st.title("Sight singing question")
+st.title("Section 2B: Signt-singing")
 st.image( Image.open("melody-image-1.png") )
 # st.audio("melody.mp3")
