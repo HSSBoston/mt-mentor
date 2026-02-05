@@ -1,15 +1,8 @@
 from music21 import *
-import random, numpy as np
-# from midi2audio import FluidSynth
-import os
 import streamlit as st
 from PIL import Image
-import os, subprocess, shutil, pathlib
-# from pydub import AudioSegment
-
-# m21Settings = environment.UserSettings()
-# m21Settings["musescoreDirectPNGPath"] = "/Applications/MuseScore 4.app/Contents/MacOS/mscore"
-# print( m21Settings["musescoreDirectPNGPath"] )
+import os, subprocess, shutil
+from sight_singing_gen import *
 
 def findMusescoreCmd():
     for cmd in ("musescore", "mscore", "musescore3"):
