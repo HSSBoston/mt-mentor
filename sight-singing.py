@@ -40,6 +40,9 @@ def midi2mp3(midiPath):
         ["ffmpeg", "-y", "-i", "melody.wav", "-codec:a", "libmp3lame", "-q:a", "4", "melody.mp3"],
         check=True)
 
+m21Settings = environment.UserSettings()
+m21Settings["musescoreDirectPNGPath"] = MUSESCORE_PATH
+
 score = generateSightSingingScore()
 # score.write("musicxml", "melody.xml")
 score.write("musicxml.png", fp = "melody-image.png")
