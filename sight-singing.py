@@ -13,8 +13,6 @@ def findMuseScoreCmd():
 MUSESCORE_CMD = findMuseScoreCmd()
 # st.write(MUSESCORE_PATH)
 
-MUSESCORE_PATH = shutil.which(MUSESCORE_CMD)
-
 if not shutil.which("xvfb-run"):
     raise RuntimeError("xvfb-run not found on PATH.")
 
@@ -42,16 +40,10 @@ def midi2mp3(midiPath):
         ["ffmpeg", "-y", "-i", "melody.wav", "-codec:a", "libmp3lame", "-q:a", "4", "melody.mp3"],
         check=True)
 
-m21Settings = environment.UserSettings()
-m21Settings["musescoreDirectPNGPath"] = MUSESCORE_PATH
-
 score = generateSightSingingScore()
-# score.write("musicxml", "melody.xml")
-score.write("musicxml.png", fp = "melody-image.png")
-score.write("midi",         fp = "melody.mid")
-
-# mxml2img("melody.xml")
-# mxml2midi("melody.xml")
+score.write("musicxml", "melody.xml")
+mxml2img("melody.xml")
+mxml2midi("melody.xml")
 midi2mp3("melody.mid")
 
 st.title("Section 2B: Sight-singing")
