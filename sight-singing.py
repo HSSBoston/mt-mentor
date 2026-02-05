@@ -25,6 +25,12 @@ def mxml2img(mxmlPath):
         check=True,
         env=env)
 
+def cropHeight(maxHeightPx=100):
+    img = Image.open("image-1.png")
+    w, h = img.size
+    cropped = img.crop((0, 0, w, min(h, maxHeightPx)))
+    cropped.save("melody-1.png")
+    
 def verticalAutoCrop(bg_color=(255, 255, 255)):
     img = Image.open("melody-1.png").convert("RGB")
     # Create background image
@@ -55,7 +61,7 @@ def midi2mp3(midiPath):
 score = generateSightSingingScore()
 score.write("musicxml", "melody.xml")
 mxml2img("melody.xml")
-verticalAutoCrop()
+cropHeight()
 mxml2midi("melody.xml")
 midi2mp3("melody.mid")
 
