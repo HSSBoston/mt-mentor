@@ -54,8 +54,8 @@ def midi2mp3(midiPath):
 
 score = generateSightSingingScore()
 score.write("musicxml", "melody.xml")
-verticalAutoCrop()
 mxml2img("melody.xml")
+verticalAutoCrop()
 mxml2midi("melody.xml")
 midi2mp3("melody.mid")
 
