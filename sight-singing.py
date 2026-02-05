@@ -41,9 +41,12 @@ def midi2mp3(midiPath):
         check=True)
 
 score = generateSightSingingScore()
-score.write("musicxml", "melody.xml")
-mxml2img("melody.xml")
-mxml2midi("melody.xml")
+# score.write("musicxml", "melody.xml")
+score.write("musicxml.png", fp = "melody-image.png")
+score.write("midi",         fp = "melody.mid")
+
+# mxml2img("melody.xml")
+# mxml2midi("melody.xml")
 midi2mp3("melody.mid")
 
 st.title("Section 2B: Sight-singing")
