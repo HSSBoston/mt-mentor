@@ -129,6 +129,7 @@ def generateSightSingingScore():
     print("Time signature:", timeSig)
 
     # Score initialization
+    score = stream.Score()
     melody = stream.Part()
     m1 = stream.Measure()
     m1.append(cl)
@@ -229,7 +230,11 @@ def generateSightSingingScore():
     melody.append(m2)
     melody.append(m3)
     melody.append(m4)
-    return melody
+    score(0, melody)
+    score.insert(0, metadata.Metadata())
+    score.metadata.title = "AP Sight-singing Question"
+    score.metadata.composer = "Music Theory Mentor"
+    return score
 
 if __name__ == "__main__":
     score = generateSightSingingScore()
