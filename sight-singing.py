@@ -39,5 +39,5 @@ mxml2imgMidi("melody.xml")
 # score2mp3(score)
 
 st.title("Sight singing question")
-st.image( Image.open("melody-image.png") )
+st.image( Image.open("melody-image-1.png") )
 # st.audio("melody.mp3")
