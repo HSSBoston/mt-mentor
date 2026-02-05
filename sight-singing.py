@@ -16,28 +16,32 @@ MUSESCORE_PATH = findMuseScorePath()
 if not shutil.which("xvfb-run"):
     raise RuntimeError("xvfb-run not found on PATH.")
 
-def mxml2imgMidi(mxmlPath):
-    env = os.environ.copy()
-    env["QT_QPA_PLATFORM"] = "offscreen"
+env = os.environ.copy()
+env["QT_QPA_PLATFORM"] = "offscreen"
 
+def mxml2img(mxmlPath):
     subprocess.run(
-        ["xvfb-run", "-a", MUSESCORE_PATH, "-o", "melody-image.png", mxmlPath],
+        ["xvfb-run", "-a", MUSESCORE_PATH, mxmlPath, "-o", "melody-image.png"],
         check=True,
         env=env)
-    
-#     score.write("musicxml.png", fp = "melody-image.png")
-#     score.write("midi",         fp = "melody.mid")
-    
 
-# def score2mp3(score):    
-#     cmd = [MUSESCORE_PATH, "melody.mid", "-o", "melody.mp3"]
-#     subprocess.run(cmd, check=True)
+def mxml2midi(mxmlPath):
+    subprocess.run(
+        ["xvfb-run", "-a", MUSESCORE_PATH, mxmlPath, "-o", "melody.mid"],
+        check=True,
+        env=env)
+
+def midi2mp3(midiPath):    
+    subprocess.run(
+        ["xvfb-run", "-a", MUSESCORE_PATH, midiPath, "-o", "melody.mp3"],
+        check=True,
+        env=env)
 
 score = generateSightSingingScore()
 score.write("musicxml", "melody.xml")
 mxml2imgMidi("melody.xml")
-# score2mp3(score)
+midi2mp3("melody.mid")
 
 st.title("Section 2B: Signt-singing")
 st.image( Image.open("melody-image-1.png") )
-# st.audio("melody.mp3")
+st.audio("melody.mp3")
