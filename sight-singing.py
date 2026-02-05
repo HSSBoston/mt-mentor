@@ -4,14 +4,16 @@ from PIL import Image
 import os, subprocess, shutil
 from sight_singing_gen import *
 
-def findMuseScorePath():
+def findMuseScoreCmd():
     for cmd in ("musescore", "mscore", "musescore3"):
         if shutil.which(cmd):
             return cmd
     raise RuntimeError("MuseScore executable not found on PATH.")
 
-MUSESCORE_PATH = findMuseScorePath()
+MUSESCORE_CMD = findMuseScoreCmd()
 # st.write(MUSESCORE_PATH)
+
+MUSESCORE_PATH = shutil.which(MUSESCORE_CMD)
 
 if not shutil.which("xvfb-run"):
     raise RuntimeError("xvfb-run not found on PATH.")
@@ -21,19 +23,19 @@ env["QT_QPA_PLATFORM"] = "offscreen"
 
 def mxml2img(mxmlPath):
     subprocess.run(
-        ["xvfb-run", "-a", MUSESCORE_PATH, mxmlPath, "-o", "melody-image.png"],
+        ["xvfb-run", "-a", MUSESCORE_CMD, mxmlPath, "-o", "melody-image.png"],
         check=True,
         env=env)
 
 def mxml2midi(mxmlPath):
     subprocess.run(
-        ["xvfb-run", "-a", MUSESCORE_PATH, mxmlPath, "-o", "melody.mid"],
+        ["xvfb-run", "-a", MUSESCORE_CMD, mxmlPath, "-o", "melody.mid"],
         check=True,
         env=env)
 
 def midi2mp3(midiPath):
     subprocess.run(
-        ["xvfb-run", "-a", MUSESCORE_PATH, "melody.mid", "-o", "melody.wav"],
+        ["xvfb-run", "-a", MUSESCORE_CMD, "melody.mid", "-o", "melody.wav"],
         check=True,
         env=env)    
     subprocess.run(
