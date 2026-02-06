@@ -239,4 +239,4 @@ def generateSightSingingScore():
 if __name__ == "__main__":
     score = generateSightSingingScore()
     score.show("text")
-#     score.show()
+    score.show()
