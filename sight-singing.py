@@ -35,6 +35,7 @@ def cropHeight():
         whiteBg.save("melody-1.png")
     else:
         cropped.convert("RGB").save("melody-1.png")
+    st.write(cropped.mode)
     
 def verticalAutoCrop(bg_color=(255, 255, 255)):
     img = Image.open("melody-1.png").convert("RGB")
