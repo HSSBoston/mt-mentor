@@ -29,7 +29,7 @@ def cropHeight():
     img = Image.open("melody-1.png")
     w, h = img.size
     cropped = img.crop((0, 250, w, 700))
-    st.write(cropped.mode)
+    
     if cropped.mode in ("RGBA", "LA"):
         whiteBg = Image.new("RGB", cropped.size, (255, 255, 255))
         whiteBg.paste(cropped, mask=cropped.split()[-1])
@@ -67,7 +67,7 @@ def midi2mp3(midiPath):
 score = generateSightSingingScore()
 score.write("musicxml", "melody.xml")
 mxml2img("melody.xml")
-# cropHeight()
+cropHeight()
 mxml2midi("melody.xml")
 midi2mp3("melody.mid")
 
