@@ -233,7 +233,7 @@ def generateSightSingingScore():
     score.insert(0, melody)
     score.insert(0, metadata.Metadata())
     score.metadata.title = ""
-    score.metadata.composer = ""
+    score.metadata.composer = "Music Theory Mentor"
     return score
 
 if __name__ == "__main__":
