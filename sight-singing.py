@@ -1,6 +1,6 @@
 from music21 import *
 import streamlit as st
-from PIL import Image, ImageChops
+from PIL import Image
 import os, subprocess, shutil
 from sight_singing_gen import *
 
@@ -21,7 +21,7 @@ env["QT_QPA_PLATFORM"] = "offscreen"
 
 def mxml2img():
     subprocess.run(
-        ["xvfb-run", "-a", MUSESCORE_CMD, "melody.xml", "-o", "melody.png"],
+        ["xvfb-run", "-a", MUSESCORE_CMD, "-r", "300", "melody.xml", "-o", "melody.png"],
         check=True,
         env=env)
 
