@@ -21,7 +21,7 @@ env["QT_QPA_PLATFORM"] = "offscreen"
 
 def mxml2img():
     subprocess.run(
-        ["xvfb-run", "-a", MUSESCORE_CMD, "-r", "500", "melody.xml", "-o", "melody.png"],
+        ["xvfb-run", "-a", MUSESCORE_CMD, "-r", "300", "melody.xml", "-o", "melody.png"],
         check=True,
         env=env)
 
