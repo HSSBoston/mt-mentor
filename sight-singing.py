@@ -19,9 +19,9 @@ if not shutil.which("xvfb-run"):
 env = os.environ.copy()
 env["QT_QPA_PLATFORM"] = "offscreen"
 
-def mxml2img(mxmlPath):
+def mxml2img():
     subprocess.run(
-        ["xvfb-run", "-a", MUSESCORE_CMD, mxmlPath, "-o", "melody.png"],
+        ["xvfb-run", "-a", MUSESCORE_CMD, "melody.xml", "-o", "melody.png"],
         check=True,
         env=env)
 
@@ -37,25 +37,13 @@ def cropHeight():
     else:
         cropped.convert("RGB").save("melody-1.png")
     
-def verticalAutoCrop(bg_color=(255, 255, 255)):
-    img = Image.open("melody-1.png").convert("RGB")
-    # Create background image
-    bg = Image.new("RGB", img.size, bg_color)
-    # Difference between image and background
-    diff = ImageChops.difference(img, bg)
-    bbox = diff.getbbox()
-    if bbox:
-        img.crop(bbox).save("melody-1.png")
-    else:
-        img.save("melody.png")
-
-def mxml2midi(mxmlPath):
+def mxml2midi():
     subprocess.run(
-        ["xvfb-run", "-a", MUSESCORE_CMD, mxmlPath, "-o", "melody.mid"],
+        ["xvfb-run", "-a", MUSESCORE_CMD, "melody.xml", "-o", "melody.mid"],
         check=True,
         env=env)
 
-def midi2mp3(midiPath):
+def midi2mp3():
     subprocess.run(
         ["xvfb-run", "-a", MUSESCORE_CMD, "melody.mid", "-o", "melody.wav"],
         check=True,
@@ -66,11 +54,11 @@ def midi2mp3(midiPath):
 
 score = generateSightSingingScore()
 score.write("musicxml", "melody.xml")
-mxml2img("melody.xml")
+mxml2img()
 cropHeight()
-mxml2midi("melody.xml")
-midi2mp3("melody.mid")
+mxml2midi()
+midi2mp3()
 
 st.title("Section 2B: Sight-singing")
-st.image( Image.open("melody-1.png") )
+st.image(Image.open("melody-1.png"))
 st.audio("melody.mp3")
