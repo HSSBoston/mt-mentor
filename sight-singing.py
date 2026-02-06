@@ -25,7 +25,7 @@ def mxml2img(mxmlPath):
         check=True,
         env=env)
 
-def cropHeight(maxHeightPx=100):
+def cropHeight(maxHeightPx=300):
     img = Image.open("melody-1.png")
     w, h = img.size
     cropped = img.crop((0, 0, w, min(h, maxHeightPx)))
