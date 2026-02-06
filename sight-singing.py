@@ -28,7 +28,7 @@ def mxml2img(mxmlPath):
 def cropHeight():
     img = Image.open("melody-1.png")
     w, h = img.size
-    cropped = img.crop((0, 300, w, 700))
+    cropped = img.crop((0, 250, w, 700))
     cropped.save("melody-1.png")
     
 def verticalAutoCrop(bg_color=(255, 255, 255)):
