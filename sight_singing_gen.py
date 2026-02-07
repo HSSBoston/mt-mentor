@@ -78,7 +78,7 @@ measureFourSE = [
     [0.5, 1,   1.5]]
 
 # Key choices
-keyLettersList = ["C","G","D","A","F","B-","E-",
+keyLettersList = ["C","G","D","F","B-","E-",
                   "a","e","b", "d", "g", "c"]
 
 # adjust the octave of a new note by prioritizing stepwise melodic motion
