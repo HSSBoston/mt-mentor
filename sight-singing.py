@@ -4,6 +4,13 @@ from PIL import Image
 import os, subprocess, shutil
 from sight_singing_gen import *
 
+params = st.query_params
+is_ping = params.get("p") == "1"
+
+if is_ping:
+    st.write("pong")
+    st.stop()
+
 def findMuseScoreCmd():
     for cmd in ("musescore", "musescore3", "mscore"):
         if shutil.which(cmd):
