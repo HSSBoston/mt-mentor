@@ -1,0 +1,15 @@
+name: Ping MT Mentor
+
+on:
+  schedule:
+    # 8 times a day (every 3 hours) in UTC
+    - cron: "0 0,3,6,9,12,15,18,21 * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Curl the app
+        run: |
+          curl -sS --fail --max-time 30 --max-redirs 3 "https://mt-mentor.streamlit.app/healthz" > /dev/null
