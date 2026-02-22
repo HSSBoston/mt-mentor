@@ -1,0 +1,15 @@
+name: Ping MT Mentor
+
+on:
+  schedule:
+    # 4 times a day (every 6 hours) in UTC
+    - cron: "0 0,6,12,18 * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Curl the app
+        run: |
+          curl -L --fail --max-time 30 "https://mt-mentor.streamlit.app/?p=1" > /dev/null
