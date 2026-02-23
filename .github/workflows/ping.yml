@@ -2,8 +2,8 @@ name: Ping MT Mentor
 
 on:
   schedule:
-    # 4 times a day (every 6 hours) in UTC
-    - cron: "0 0,6,12,18 * * *"
+    # 8 times a day (every 3 hours) in UTC
+    - cron: "0 0,3,6,9,12,15,18,21 * * *"
   workflow_dispatch:
 
 jobs:
